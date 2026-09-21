@@ -4,7 +4,7 @@ captureUrl = strcat(config.piControl.baseUrl, config.piControl.captureEndpoint);
 imageNames = cell(numel(ledPositions), 1);
 
 for index = 1:numel(ledPositions)
-    imageNames{index} = sprintf('capture_%03d_led_r%02d_c%02d.png', index, ledPositions(index).ledRow, ledPositions(index).ledCol);
+    imageNames{index} = sprintf('led_r%02d_c%02d.png', ledPositions(index).ledRow, ledPositions(index).ledCol);
 end
 
 captureUrls = repmat({captureUrl}, numel(ledPositions), 1);

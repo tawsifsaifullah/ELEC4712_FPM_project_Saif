@@ -24,12 +24,11 @@ All MATLAB files are in the repository `matlab/` directory.
 
 ## How to run
 
-From MATLAB:
+From MATLAB, run the scripts using repository-relative paths:
 
 ```matlab
-cd('matlab');
-run_fpm_simulation_demo
-run_raspberry_pi_capture_plan_demo
+run('matlab/run_fpm_simulation_demo.m')
+run('matlab/run_raspberry_pi_capture_plan_demo.m')
 ```
 
 ## Notes for thesis implementation
