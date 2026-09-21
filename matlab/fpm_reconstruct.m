@@ -4,7 +4,6 @@ if nargin < 3 || isempty(ledPositions)
 end
 
 pupil = fpm_build_pupil(config);
-beta = config.beta;
 upsampleFactor = config.upsampleFactor;
 
 referenceIndex = find([ledPositions.isBrightfieldReference], 1, 'first');
@@ -31,10 +30,7 @@ for iteration = 1:config.iterations
         updatedField = measuredAmplitude .* exp(1i * angle(detectorField));
         updatedSpectrum = fftshift(fft2(updatedField));
 
-        correction = updatedSpectrum - spectrumPatch .* pupil;
-        pupilMask = pupil > 0;
-        spectrumPatch(pupilMask) = spectrumPatch(pupilMask) + ...
-            beta * correction(pupilMask) .* conj(pupil(pupilMask)) ./ max(abs(pupil(pupilMask)) .^ 2, eps);
+        spectrumPatch = updatedSpectrum .* pupil;
         objectSpectrum(rowRange, colRange) = spectrumPatch;
 
         updatedDetectorField = ifft2(ifftshift(objectSpectrum(rowRange, colRange) .* pupil));

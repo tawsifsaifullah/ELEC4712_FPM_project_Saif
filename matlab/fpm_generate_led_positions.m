@@ -7,7 +7,7 @@ colCenter = (cols + 1) / 2;
 objectPlanePixelSize = config.sensorPixelSize / (config.magnification * config.upsampleFactor);
 dfx = 1 / (config.reconstructionSize(2) * objectPlanePixelSize);
 dfy = 1 / (config.reconstructionSize(1) * objectPlanePixelSize);
-patchSize = size(fpm_build_pupil(config));
+patchSize = config.sensorSize;
 fftCenterRow = floor(config.reconstructionSize(1) / 2) + 1;
 fftCenterCol = floor(config.reconstructionSize(2) / 2) + 1;
 

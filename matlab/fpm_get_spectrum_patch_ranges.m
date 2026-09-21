@@ -1,7 +1,7 @@
 function [rowRange, colRange] = fpm_get_spectrum_patch_ranges(config, ledPosition)
 fftCenterRow = floor(config.reconstructionSize(1) / 2) + 1;
 fftCenterCol = floor(config.reconstructionSize(2) / 2) + 1;
-patchSize = size(fpm_build_pupil(config));
+patchSize = config.sensorSize;
 
 rowStart = fftCenterRow - floor((patchSize(1) - 1) / 2) + ledPosition.shiftY;
 colStart = fftCenterCol - floor((patchSize(2) - 1) / 2) + ledPosition.shiftX;
