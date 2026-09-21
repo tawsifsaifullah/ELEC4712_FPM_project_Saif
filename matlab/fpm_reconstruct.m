@@ -13,7 +13,7 @@ if isempty(referenceIndex)
 end
 
 referenceAmplitude = sqrt(max(intensityStack(:, :, referenceIndex), 0));
-objectEstimate = kron(referenceAmplitude, ones(upsampleFactor));
+objectEstimate = repelem(referenceAmplitude, upsampleFactor, upsampleFactor);
 objectEstimate = objectEstimate(1:config.reconstructionSize(1), 1:config.reconstructionSize(2));
 objectEstimate = objectEstimate .* exp(1i * zeros(config.reconstructionSize));
 objectSpectrum = fftshift(fft2(objectEstimate));

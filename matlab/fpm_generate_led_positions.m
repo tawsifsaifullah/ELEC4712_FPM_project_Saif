@@ -7,6 +7,9 @@ colCenter = (cols + 1) / 2;
 objectPlanePixelSize = config.sensorPixelSize / (config.magnification * config.upsampleFactor);
 dfx = 1 / (config.reconstructionSize(2) * objectPlanePixelSize);
 dfy = 1 / (config.reconstructionSize(1) * objectPlanePixelSize);
+patchSize = size(fpm_build_pupil(config));
+fftCenterRow = floor(config.reconstructionSize(1) / 2) + 1;
+fftCenterCol = floor(config.reconstructionSize(2) / 2) + 1;
 
 index = 0;
 positions = repmat(struct( ...
@@ -40,9 +43,10 @@ for row = 1:rows
         shiftX = round((illuminationNaX / config.wavelength) / dfx);
         shiftY = round((illuminationNaY / config.wavelength) / dfy);
 
-        ledPosition.shiftX = shiftX;
-        ledPosition.shiftY = shiftY;
-        [rowRange, colRange] = fpm_get_spectrum_patch_ranges(config, ledPosition);
+        rowStart = fftCenterRow - floor((patchSize(1) - 1) / 2) + shiftY;
+        colStart = fftCenterCol - floor((patchSize(2) - 1) / 2) + shiftX;
+        rowRange = rowStart:(rowStart + patchSize(1) - 1);
+        colRange = colStart:(colStart + patchSize(2) - 1);
 
         if min(rowRange) < 1 || min(colRange) < 1 || ...
                 max(rowRange) > config.reconstructionSize(1) || ...
