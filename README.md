@@ -44,6 +44,6 @@ run_raspberry_pi_capture_plan_demo
 ## Notes for thesis implementation
 
 - Start by tuning `fpm_default_config.m` so the LED pitch, LED height, NA, magnification, sensor size, and exposure settings match your microscope.
-- `excludeSpectrumPatchesOutsideReconstructionGrid` controls whether LEDs whose Fourier patches fall outside the current reconstruction grid are automatically excluded from both simulation and hardware capture planning, using the same reconstruction-grid frequency step as the pupil model.
+- `excludeSpectrumPatchesOutsideReconstructionGrid` documents the current safety rule that LEDs whose Fourier patches fall outside the current reconstruction grid are excluded from both simulation and hardware capture planning, using the same reconstruction-grid frequency step as the pupil model.
 - The simulation path is self-contained and is useful for validating reconstruction behavior before hardware work.
 - The Raspberry Pi manifest contains LED order, exposure time, settling time, and a configurable capture endpoint so the same MATLAB planning step can drive a microscope acquisition service running on the Raspberry Pi.

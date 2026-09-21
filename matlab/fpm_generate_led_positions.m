@@ -4,6 +4,11 @@ cols = config.ledArraySize(2);
 rowCenter = (rows + 1) / 2;
 colCenter = (cols + 1) / 2;
 
+if ~config.excludeSpectrumPatchesOutsideReconstructionGrid
+    error(['excludeSpectrumPatchesOutsideReconstructionGrid must remain true unless ', ...
+        'custom padding or clamping is added for out-of-bounds spectrum patches.']);
+end
+
 [dfx, dfy] = fpm_get_reconstruction_frequency_step(config);
 patchSize = config.sensorSize;
 fftCenterRow = floor(config.reconstructionSize(1) / 2) + 1;
@@ -47,10 +52,9 @@ for row = 1:rows
         rowRange = rowStart:(rowStart + patchSize(1) - 1);
         colRange = colStart:(colStart + patchSize(2) - 1);
 
-        if config.excludeSpectrumPatchesOutsideReconstructionGrid && ...
-                (min(rowRange) < 1 || min(colRange) < 1 || ...
+        if min(rowRange) < 1 || min(colRange) < 1 || ...
                 max(rowRange) > config.reconstructionSize(1) || ...
-                max(colRange) > config.reconstructionSize(2))
+                max(colRange) > config.reconstructionSize(2)
             continue;
         end
 
