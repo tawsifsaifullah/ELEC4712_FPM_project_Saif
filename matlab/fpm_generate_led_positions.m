@@ -27,21 +27,22 @@ for row = 1:rows
     for col = 1:cols
         x = (col - colCenter) * config.ledPitch;
         y = (row - rowCenter) * config.ledPitch;
+        sourceDistance = sqrt(x ^ 2 + y ^ 2 + config.ledHeight ^ 2);
 
-        thetaX = atan2(x, config.ledHeight);
-        thetaY = atan2(y, config.ledHeight);
-        illuminationNaX = sin(thetaX);
-        illuminationNaY = sin(thetaY);
+        illuminationNaX = x / sourceDistance;
+        illuminationNaY = y / sourceDistance;
         illuminationNa = hypot(illuminationNaX, illuminationNaY);
 
         if illuminationNa > config.maxIlluminationNA
             continue;
         end
 
-        illuminationFrequencyX = illuminationNaX / config.wavelength;
-        illuminationFrequencyY = illuminationNaY / config.wavelength;
-        shiftX = round(illuminationFrequencyX / dfx);
-        shiftY = round(illuminationFrequencyY / dfy);
+        illuminationFrequencyX = (illuminationNaX / config.wavelength) / config.magnification;
+        illuminationFrequencyY = (illuminationNaY / config.wavelength) / config.magnification;
+        sensorReferencedDfx = dfx / config.magnification;
+        sensorReferencedDfy = dfy / config.magnification;
+        shiftX = round(illuminationFrequencyX / sensorReferencedDfx);
+        shiftY = round(illuminationFrequencyY / sensorReferencedDfy);
 
         rowStart = fftCenterRow - floor((patchSize(1) - 1) / 2) + shiftY;
         colStart = fftCenterCol - floor((patchSize(2) - 1) / 2) + shiftX;
