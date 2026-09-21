@@ -37,12 +37,10 @@ for row = 1:rows
             continue;
         end
 
-        illuminationFrequencyX = (illuminationNaX / config.wavelength) / config.magnification;
-        illuminationFrequencyY = (illuminationNaY / config.wavelength) / config.magnification;
-        sensorReferencedDfx = dfx / config.magnification;
-        sensorReferencedDfy = dfy / config.magnification;
-        shiftX = round(illuminationFrequencyX / sensorReferencedDfx);
-        shiftY = round(illuminationFrequencyY / sensorReferencedDfy);
+        illuminationFrequencyX = illuminationNaX / config.wavelength;
+        illuminationFrequencyY = illuminationNaY / config.wavelength;
+        shiftX = round(illuminationFrequencyX / dfx);
+        shiftY = round(illuminationFrequencyY / dfy);
 
         rowStart = fftCenterRow - floor((patchSize(1) - 1) / 2) + shiftY;
         colStart = fftCenterCol - floor((patchSize(2) - 1) / 2) + shiftX;
