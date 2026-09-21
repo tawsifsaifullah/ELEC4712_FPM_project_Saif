@@ -1,5 +1,5 @@
 # ELEC4712_FPM_project_Saif
-My workspace for fourier ptychographic microscopy system development and implementation.
+My workspace for Fourier ptychographic microscopy system development and implementation.
 
 ## MATLAB starter workflow
 

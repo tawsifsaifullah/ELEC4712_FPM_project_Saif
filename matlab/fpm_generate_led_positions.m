@@ -4,9 +4,9 @@ cols = config.ledArraySize(2);
 rowCenter = (rows + 1) / 2;
 colCenter = (cols + 1) / 2;
 
-samplePlanePixelSize = config.sensorPixelSize / config.magnification;
-dfx = 1 / (config.sensorSize(2) * samplePlanePixelSize);
-dfy = 1 / (config.sensorSize(1) * samplePlanePixelSize);
+objectPlanePixelSize = config.sensorPixelSize / (config.magnification * config.upsampleFactor);
+dfx = 1 / (config.reconstructionSize(2) * objectPlanePixelSize);
+dfy = 1 / (config.reconstructionSize(1) * objectPlanePixelSize);
 
 index = 0;
 positions = repmat(struct( ...
