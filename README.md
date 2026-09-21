@@ -21,10 +21,10 @@ The following papers are the most relevant references for improving this work an
 
 ### 3. Raspberry Pi specific FPM implementation
 
-- **Konda, P. C., Aidukas, T., Taylor, J., Harvey, A. R. (2017)**  
-  Exact paper title: *Miniature Fourier Ptychography Microscope using Raspberry Pi Camera and Hardware*  
+- **Konda, Pavan Chandra, Aidukas, Tomas, Taylor, Jonathan and Harvey, Andrew R. (2017)**  
+  *Miniature Fourier Ptychography Microscope using Raspberry Pi Camera and Hardware.* Imaging and Applied Optics 2017, San Francisco, CA, USA, 26-29 Jun 2017. DOI: 10.1364/3D.2017.JTu5A.17  
   Why it matters: this conference paper is closely aligned with the hardware direction of this project and is useful for practical implementation details using Raspberry Pi components.  
-  PDF: http://eprints.gla.ac.uk/145088/
+  Repository record: http://eprints.gla.ac.uk/145088/
 
 ### 4. Validation and performance testing
 
