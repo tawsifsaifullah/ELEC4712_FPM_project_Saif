@@ -9,7 +9,7 @@ This repository now includes a minimal MATLAB workflow for:
 - reconstructing a higher resolution complex object from the simulated captures
 - generating a Raspberry Pi microscope capture manifest that can be consumed by a programmable acquisition service
 
-All MATLAB files are in `/home/runner/work/ELEC4712_FPM_project_Saif/ELEC4712_FPM_project_Saif/matlab`.
+All MATLAB files are in the repository `matlab/` directory.
 
 ## Files
 
@@ -27,7 +27,7 @@ All MATLAB files are in `/home/runner/work/ELEC4712_FPM_project_Saif/ELEC4712_FP
 From MATLAB:
 
 ```matlab
-cd('/home/runner/work/ELEC4712_FPM_project_Saif/ELEC4712_FPM_project_Saif/matlab');
+cd('matlab');
 run_fpm_simulation_demo
 run_raspberry_pi_capture_plan_demo
 ```

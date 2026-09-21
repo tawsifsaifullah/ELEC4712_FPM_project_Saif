@@ -38,7 +38,9 @@ for iteration = 1:config.iterations
         updatedSpectrum = fftshift(fft2(updatedField));
 
         correction = updatedSpectrum - spectrumPatch .* pupil;
-        spectrumPatch = spectrumPatch + beta * correction .* conj(pupil) ./ max(abs(pupil) .^ 2, eps);
+        pupilMask = pupil > 0;
+        spectrumPatch(pupilMask) = spectrumPatch(pupilMask) + ...
+            beta * correction(pupilMask) .* conj(pupil(pupilMask)) ./ max(abs(pupil(pupilMask)) .^ 2, eps);
         objectSpectrum(rowRange, colRange) = spectrumPatch;
 
         amplitudeResidual = abs(abs(detectorField) - measuredAmplitude);
