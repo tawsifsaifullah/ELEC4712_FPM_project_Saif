@@ -72,6 +72,7 @@ end
 [~, order] = sortrows([[positions.radius].', [positions.illuminationNa].'], [1 2]);
 ledPositions = positions(order);
 [ledPositions.isBrightfieldReference] = deal(false);
-[~, referenceIndex] = min([ledPositions.illuminationNa] + eps * [ledPositions.radius]);
+[~, referenceOrder] = sortrows([[ledPositions.illuminationNa].', [ledPositions.radius].'], [1 2]);
+referenceIndex = referenceOrder(1);
 ledPositions(referenceIndex).isBrightfieldReference = true;
 end
