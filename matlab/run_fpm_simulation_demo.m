@@ -44,8 +44,8 @@ title('Reconstructed phase');
 subplot(2, 3, 6);
 plot(reconstruction.errorHistory, '-o', 'LineWidth', 1.2);
 xlabel('Iteration');
-ylabel('Mean amplitude error');
-title('Reconstruction convergence');
+ylabel('Mean post-update amplitude residual');
+title('Detector residual after each iteration');
 grid on;
 
 disp('Simulation complete.');

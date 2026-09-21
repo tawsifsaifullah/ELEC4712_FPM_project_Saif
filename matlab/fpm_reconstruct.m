@@ -30,7 +30,11 @@ for iteration = 1:config.iterations
         updatedField = measuredAmplitude .* exp(1i * angle(detectorField));
         updatedSpectrum = fftshift(fft2(updatedField));
 
-        spectrumPatch = updatedSpectrum .* pupil;
+        pupilMask = pupil > 0;
+        correction = updatedSpectrum - spectrumPatch .* pupil;
+        spectrumPatch(pupilMask) = spectrumPatch(pupilMask) + ...
+            config.beta * correction(pupilMask) .* conj(pupil(pupilMask)) ./ max(abs(pupil(pupilMask)) .^ 2, eps);
+        spectrumPatch(~pupilMask) = 0;
         objectSpectrum(rowRange, colRange) = spectrumPatch;
 
         updatedDetectorField = ifft2(ifftshift(objectSpectrum(rowRange, colRange) .* pupil));
