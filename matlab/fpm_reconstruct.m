@@ -37,7 +37,8 @@ for iteration = 1:config.iterations
             beta * correction(pupilMask) .* conj(pupil(pupilMask)) ./ max(abs(pupil(pupilMask)) .^ 2, eps);
         objectSpectrum(rowRange, colRange) = spectrumPatch;
 
-        amplitudeResidual = abs(abs(detectorField) - measuredAmplitude);
+        updatedDetectorField = ifft2(ifftshift(objectSpectrum(rowRange, colRange) .* pupil));
+        amplitudeResidual = abs(abs(updatedDetectorField) - measuredAmplitude);
         cumulativeError = cumulativeError + mean(amplitudeResidual(:));
     end
 
