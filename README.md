@@ -18,6 +18,7 @@ All MATLAB files are in the repository `matlab/` directory.
 - `matlab/fpm_default_config.m` — editable optical, sensor, LED, and Raspberry Pi settings
 - `matlab/fpm_generate_sample_object.m` — synthetic complex sample for simulation
 - `matlab/fpm_generate_led_positions.m` — LED geometry, ordering, and Fourier shift calculation
+- `matlab/fpm_get_reconstruction_frequency_step.m` — shared reconstruction-grid frequency sampling used by both the pupil model and LED shift mapping
 - `matlab/fpm_get_spectrum_patch_ranges.m` — shared Fourier patch indexing helper used by simulation and reconstruction
 - `matlab/fpm_build_pupil.m` — shared coherent pupil model
 - `matlab/fpm_simulate_dataset.m` — low-resolution image simulation for each LED illumination
@@ -43,6 +44,6 @@ run_raspberry_pi_capture_plan_demo
 ## Notes for thesis implementation
 
 - Start by tuning `fpm_default_config.m` so the LED pitch, LED height, NA, magnification, sensor size, and exposure settings match your microscope.
-- `excludeSpectrumPatchesOutsideReconstructionGrid` controls whether LEDs whose Fourier patches fall outside the current reconstruction grid are automatically excluded from both simulation and hardware capture planning.
+- `excludeSpectrumPatchesOutsideReconstructionGrid` controls whether LEDs whose Fourier patches fall outside the current reconstruction grid are automatically excluded from both simulation and hardware capture planning, using the same reconstruction-grid frequency step as the pupil model.
 - The simulation path is self-contained and is useful for validating reconstruction behavior before hardware work.
 - The Raspberry Pi manifest contains LED order, exposure time, settling time, and a configurable capture endpoint so the same MATLAB planning step can drive a microscope acquisition service running on the Raspberry Pi.

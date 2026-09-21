@@ -4,9 +4,7 @@ cols = config.ledArraySize(2);
 rowCenter = (rows + 1) / 2;
 colCenter = (cols + 1) / 2;
 
-objectPlanePixelSize = config.sensorPixelSize / (config.magnification * config.upsampleFactor);
-dfx = 1 / (config.reconstructionSize(2) * objectPlanePixelSize);
-dfy = 1 / (config.reconstructionSize(1) * objectPlanePixelSize);
+[dfx, dfy] = fpm_get_reconstruction_frequency_step(config);
 patchSize = config.sensorSize;
 fftCenterRow = floor(config.reconstructionSize(1) / 2) + 1;
 fftCenterCol = floor(config.reconstructionSize(2) / 2) + 1;
@@ -40,8 +38,10 @@ for row = 1:rows
             continue;
         end
 
-        shiftX = round((illuminationNaX / config.wavelength) / dfx);
-        shiftY = round((illuminationNaY / config.wavelength) / dfy);
+        illuminationFrequencyX = illuminationNaX / config.wavelength;
+        illuminationFrequencyY = illuminationNaY / config.wavelength;
+        shiftX = round(illuminationFrequencyX / dfx);
+        shiftY = round(illuminationFrequencyY / dfy);
 
         rowStart = fftCenterRow - floor((patchSize(1) - 1) / 2) + shiftY;
         colStart = fftCenterCol - floor((patchSize(2) - 1) / 2) + shiftX;
