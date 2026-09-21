@@ -13,14 +13,16 @@ All MATLAB files are in the repository `matlab/` directory.
 
 ## Files
 
-- `run_fpm_simulation_demo.m` — end-to-end simulation and reconstruction demo
-- `run_raspberry_pi_capture_plan_demo.m` — creates a CSV/MAT capture plan for a Raspberry Pi driven microscope
-- `fpm_default_config.m` — editable optical, sensor, LED, and Raspberry Pi settings
-- `fpm_generate_sample_object.m` — synthetic complex sample for simulation
-- `fpm_generate_led_positions.m` — LED geometry, ordering, and Fourier shift calculation
-- `fpm_simulate_dataset.m` — low-resolution image simulation for each LED illumination
-- `fpm_reconstruct.m` — iterative Fourier ptychographic reconstruction
-- `fpm_plan_raspberry_pi_sequence.m` — acquisition manifest builder
+- `matlab/run_fpm_simulation_demo.m` — end-to-end simulation and reconstruction demo
+- `matlab/run_raspberry_pi_capture_plan_demo.m` — creates a CSV/MAT capture plan for a Raspberry Pi driven microscope
+- `matlab/fpm_default_config.m` — editable optical, sensor, LED, and Raspberry Pi settings
+- `matlab/fpm_generate_sample_object.m` — synthetic complex sample for simulation
+- `matlab/fpm_generate_led_positions.m` — LED geometry, ordering, and Fourier shift calculation
+- `matlab/fpm_get_spectrum_patch_ranges.m` — shared Fourier patch indexing helper used by simulation and reconstruction
+- `matlab/fpm_build_pupil.m` — shared coherent pupil model
+- `matlab/fpm_simulate_dataset.m` — low-resolution image simulation for each LED illumination
+- `matlab/fpm_reconstruct.m` — iterative Fourier ptychographic reconstruction
+- `matlab/fpm_plan_raspberry_pi_sequence.m` — acquisition manifest builder
 
 ## How to run
 
