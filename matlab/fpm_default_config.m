@@ -1,0 +1,22 @@
+function config = fpm_default_config()
+config.wavelength = 532e-9;
+config.objectiveNA = 0.08;
+config.maxIlluminationNA = 0.12;
+config.sensorSize = [96 96];
+config.upsampleFactor = 4;
+config.reconstructionSize = config.sensorSize .* config.upsampleFactor;
+config.sensorPixelSize = 1.85e-6;
+config.magnification = 2;
+config.ledArraySize = [5 5];
+config.ledPitch = 4e-3;
+config.ledHeight = 60e-3;
+config.excludeSpectrumPatchesOutsideReconstructionGrid = true;
+config.iterations = 5;
+config.beta = 0.7;
+config.intensityScale = 1;
+config.piControl.baseUrl = 'http://raspberrypi.local:5000';
+config.piControl.captureEndpoint = '/capture';
+config.piControl.exposureMs = 40;
+config.piControl.settleMs = 50;
+config.piControl.iso = 100;
+end

@@ -1,2 +1,49 @@
 # ELEC4712_FPM_project_Saif
-My workspace for  fourier pychographic microscopy system development and implementation
+My workspace for Fourier ptychographic microscopy system development and implementation.
+
+## MATLAB starter workflow
+
+This repository now includes a minimal MATLAB workflow for:
+
+- simulating a Fourier ptychographic microscopy dataset
+- reconstructing a higher resolution complex object from the simulated captures
+- generating a Raspberry Pi microscope capture manifest that can be consumed by a programmable acquisition service
+
+All MATLAB files are in the repository `matlab/` directory.
+
+## Files
+
+- `matlab/run_fpm_simulation_demo.m` — end-to-end simulation and reconstruction demo
+- `matlab/run_raspberry_pi_capture_plan_demo.m` — creates a CSV/MAT capture plan for a Raspberry Pi driven microscope
+- `matlab/fpm_default_config.m` — editable optical, sensor, LED, and Raspberry Pi settings
+- `matlab/fpm_generate_sample_object.m` — synthetic complex sample for simulation
+- `matlab/fpm_generate_led_positions.m` — LED geometry, ordering, and Fourier shift calculation
+- `matlab/fpm_get_reconstruction_frequency_step.m` — shared reconstruction-grid frequency sampling used by both the pupil model and LED shift mapping
+- `matlab/fpm_get_spectrum_patch_ranges.m` — shared Fourier patch indexing helper used by simulation and reconstruction
+- `matlab/fpm_build_pupil.m` — shared coherent pupil model
+- `matlab/fpm_simulate_dataset.m` — low-resolution image simulation for each LED illumination
+- `matlab/fpm_reconstruct.m` — iterative Fourier ptychographic reconstruction
+- `matlab/fpm_plan_raspberry_pi_sequence.m` — acquisition manifest builder
+
+## How to run
+
+From the repository root in MATLAB:
+
+```matlab
+run('matlab/run_fpm_simulation_demo.m')
+run('matlab/run_raspberry_pi_capture_plan_demo.m')
+```
+
+If your current folder is already `matlab/`, run:
+
+```matlab
+run_fpm_simulation_demo
+run_raspberry_pi_capture_plan_demo
+```
+
+## Notes for thesis implementation
+
+- Start by tuning `fpm_default_config.m` so the LED pitch, LED height, NA, magnification, sensor size, and exposure settings match your microscope.
+- `excludeSpectrumPatchesOutsideReconstructionGrid` documents the current safety rule that LEDs whose Fourier patches fall outside the current reconstruction grid are excluded from both simulation and hardware capture planning, using the same reconstruction-grid frequency step as the pupil model.
+- The simulation path is self-contained and is useful for validating reconstruction behavior before hardware work.
+- The Raspberry Pi manifest contains capture order, LED indices, LED coordinates, illumination NA components, Fourier shift estimates, exposure time, settling time, ISO, and a configurable capture endpoint so the same MATLAB planning step can drive a microscope acquisition service running on the Raspberry Pi.
