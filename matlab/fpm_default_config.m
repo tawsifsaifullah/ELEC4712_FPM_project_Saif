@@ -10,6 +10,7 @@ config.magnification = 2;
 config.ledArraySize = [5 5];
 config.ledPitch = 4e-3;
 config.ledHeight = 60e-3;
+config.excludeSpectrumPatchesOutsideReconstructionGrid = true;
 config.iterations = 5;
 config.beta = 0.7;
 config.intensityScale = 1;

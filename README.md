@@ -26,15 +26,23 @@ All MATLAB files are in the repository `matlab/` directory.
 
 ## How to run
 
-From MATLAB, run the scripts using repository-relative paths:
+From the repository root in MATLAB:
 
 ```matlab
 run('matlab/run_fpm_simulation_demo.m')
 run('matlab/run_raspberry_pi_capture_plan_demo.m')
 ```
 
+If your current folder is already `matlab/`, run:
+
+```matlab
+run_fpm_simulation_demo
+run_raspberry_pi_capture_plan_demo
+```
+
 ## Notes for thesis implementation
 
 - Start by tuning `fpm_default_config.m` so the LED pitch, LED height, NA, magnification, sensor size, and exposure settings match your microscope.
+- `excludeSpectrumPatchesOutsideReconstructionGrid` controls whether LEDs whose Fourier patches fall outside the current reconstruction grid are automatically excluded from both simulation and hardware capture planning.
 - The simulation path is self-contained and is useful for validating reconstruction behavior before hardware work.
 - The Raspberry Pi manifest contains LED order, exposure time, settling time, and a configurable capture endpoint so the same MATLAB planning step can drive a microscope acquisition service running on the Raspberry Pi.
