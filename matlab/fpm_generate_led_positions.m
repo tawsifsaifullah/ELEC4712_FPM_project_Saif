@@ -65,11 +65,17 @@ for row = 1:rows
         positions(index).shiftX = shiftX;
         positions(index).shiftY = shiftY;
         positions(index).radius = hypot(row - rowCenter, col - colCenter);
-        positions(index).isBrightfieldReference = row == rowCenter && col == colCenter;
+        positions(index).isBrightfieldReference = false;
     end
 end
 
 positions = positions(1:index);
+if isempty(positions)
+    error('No valid LED positions remain after applying illumination and spectrum bounds constraints.');
+end
+[positions.isBrightfieldReference] = deal(false);
+[~, referenceIndex] = min([positions.illuminationNa] + eps * [positions.radius]);
+positions(referenceIndex).isBrightfieldReference = true;
 [~, order] = sortrows([[positions.radius].', [positions.illuminationNa].'], [1 2]);
 ledPositions = positions(order);
 end
